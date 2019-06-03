@@ -64,7 +64,8 @@ class UserBonusController extends AbstractController
 
         return $this->render('user_bonus/new.html.twig', [
             //'task' => $task,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bonusesPerUser' => Bonus::BONUSES_PER_USER
         ]);
     }
 }

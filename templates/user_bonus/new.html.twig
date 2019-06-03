@@ -4,10 +4,10 @@
 {% block body %}
     <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h4>
-            You can submit 4 bonuses per day
+            You can submit {{ bonusesPerUser }} bonuses per day
         </h4>
         <p>
-            Bonus 0/4
+            Bonus 0/{{ bonusesPerUser }}
         </p>
     </div>
 

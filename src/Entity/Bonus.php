@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Bonus
 {
+    public const BONUSES_PER_USER = 4;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
