@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Bonus;
+use App\Entity\Casino;
 use Doctrine\DBAL\Types\StringType;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -39,6 +42,22 @@ class UserBonusController extends AbstractController
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
             ->add('bonusCode', TextType::class)
+            ->add('casino', EntityType::class, array(
+                // looks for choices from this entity
+                'class' => Casino::class,
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'title',
+
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.title', 'ASC');
+                },
+
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ))
             ->add('save', SubmitType::class, array('label' => 'Submit'))
             ->getForm();
 
