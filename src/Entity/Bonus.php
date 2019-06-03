@@ -70,6 +70,11 @@ class Bonus
      */
     private $casino;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $expiryDate;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
@@ -196,6 +201,18 @@ class Bonus
     public function setCasino(?Casino $casino): self
     {
         $this->casino = $casino;
+
+        return $this;
+    }
+
+    public function getExpiryDate(): ?\DateTimeInterface
+    {
+        return $this->expiryDate;
+    }
+
+    public function setExpiryDate(?\DateTimeInterface $expiryDate): self
+    {
+        $this->expiryDate = $expiryDate;
 
         return $this;
     }
