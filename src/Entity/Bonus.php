@@ -77,6 +77,11 @@ class Bonus
      */
     private $expiryDate;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $doesNotExpire;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
@@ -215,6 +220,18 @@ class Bonus
     public function setExpiryDate(?\DateTimeInterface $expiryDate): self
     {
         $this->expiryDate = $expiryDate;
+
+        return $this;
+    }
+
+    public function getDoesNotExpire(): ?bool
+    {
+        return $this->doesNotExpire;
+    }
+
+    public function setDoesNotExpire(?bool $doesNotExpire): self
+    {
+        $this->doesNotExpire = $doesNotExpire;
 
         return $this;
     }

@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Bonus;
 use App\Entity\Casino;
+use App\Entity\Category;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\EntityRepository;
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -58,6 +61,34 @@ class UserBonusController extends AbstractController
                 // 'multiple' => true,
                 // 'expanded' => true,
             ))
+            /*->add('category', EntityType::class, array(
+                // looks for choices from this entity
+                'class' => Category::class,
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'category',
+
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.title', 'ASC');
+                },
+
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ))*/
+            ->add('doesNotExpire', ChoiceType::class, [
+                /*'choices'  => [
+                    'Maybe' => null,
+                    'Yes' => false,
+                    'No' => true,
+                ],*/
+                'label' => 'Does it expire',
+            ])
+            ->add('expiryDate', DateTimeType::class, [
+                'date_label' => 'Expires at',
+                'years' => range(date('Y'), date('Y')+2)
+            ])
             ->add('save', SubmitType::class, array('label' => 'Submit'))
             ->getForm();
 
