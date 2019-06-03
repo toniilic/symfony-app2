@@ -58,6 +58,18 @@ class Bonus
      */
     private $draft = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="bonuses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Casino", inversedBy="bonuses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $casino;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
@@ -160,6 +172,30 @@ class Bonus
     public function setDraft(bool $draft): self
     {
         $this->draft = $draft;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCasino(): ?Casino
+    {
+        return $this->casino;
+    }
+
+    public function setCasino(?Casino $casino): self
+    {
+        $this->casino = $casino;
 
         return $this;
     }

@@ -35,33 +35,41 @@ class BonusFixtures extends Fixture implements ContainerAwareInterface, OrderedF
         Aliquam sagittis accumsan nisi ac tempor. Cras arcu ex, bibendum dapibus 
         dui et, fringilla laoreet lacus.';
 
-        $this->makeTask($manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE), $description,
-            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::CLEANING_CATEGORY_REFERENCE)
+        $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS)
             , Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
-        $this->makeTask($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
-            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::CLEANING_CATEGORY_REFERENCE),
+        $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
+            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+        $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
+            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+        $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
             Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
 
         $manager->flush();
     }
 
-    private function makeTask(&$manager, User $user, $description, $title, $budget, $category,
+    private function makeBonus(&$manager, User $user, $description, $title, $budget, $category,
                               $levelOfExpertise, $duration, $approved = true)
     {
-        $task = new Bonus();
-        $task->setAuthor($user);
-        $task->setContent($description);
-        $task->setTitle($title);
-        $task->setBonusCode('Xdghse74');
-        $task->setSlug($this->container->get('slugger')->slugify($title));
-        //$task->setCategory($category);
-/*        $task->setDueDate($dueDate);
-        $task->setLevelOfExpertise($levelOfExpertise);
-        $task->setDuration($duration);
-        $task->setPhoneNumber($user->getPhoneNumbers()[0]);
-        $task->setApproved($approved);*/
+        $bonus = new Bonus();
+        $bonus->setAuthor($user);
+        $bonus->setContent($description);
+        $bonus->setTitle($title);
+        $bonus->setBonusCode('Xdghse74');
+        $bonus->setSlug($this->container->get('slugger')->slugify($title));
+        $bonus->setCategory($category);
+        $bonus->setCasino($this->getReference(CasinoFixtures::CASINO_1));
+        
+/*        $bonus->setDueDate($dueDate);
+        $bonus->setLevelOfExpertise($levelOfExpertise);
+        $bonus->setDuration($duration);
+        $bonus->setPhoneNumber($user->getPhoneNumbers()[0]);
+        $bonus->setApproved($approved);*/
 
-        $manager->persist($task);
+        $manager->persist($bonus);
     }
 
 
@@ -72,6 +80,6 @@ class BonusFixtures extends Fixture implements ContainerAwareInterface, OrderedF
      */
     function getOrder()
     {
-        return 6;
+        return 7;
     }
 }

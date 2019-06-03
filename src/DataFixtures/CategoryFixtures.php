@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CategoryFixtures extends Fixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
     public const CLEANING_CATEGORY_REFERENCE = 'cleaning-category';
+    public const FREE_SPINS = 'free-spins';
 
     /**
      * @var ContainerInterface
@@ -30,6 +31,8 @@ class CategoryFixtures extends Fixture implements ContainerAwareInterface, Order
     {
         $category = $this->makeCategory($manager, 'Delivery');
         $this->addReference(self::CLEANING_CATEGORY_REFERENCE, $category);
+        $category = $this->makeCategory($manager, 'Free spins');
+        $this->addReference(self::FREE_SPINS, $category);
         $this->makeCategory($manager,'Cleaning');
         $this->makeCategory($manager,'Repair and construction');
         $this->makeCategory($manager,'Domestic services');

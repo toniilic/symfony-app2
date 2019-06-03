@@ -33,9 +33,15 @@ class Category
      */
     private $tasks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Bonus", mappedBy="category")
+     */
+    private $bonuses;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->bonuses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +98,37 @@ class Category
             // set the owning side to null (unless already changed)
             if ($task->getCategory() === $this) {
                 $task->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bonus[]
+     */
+    public function getBonuses(): Collection
+    {
+        return $this->bonuses;
+    }
+
+    public function addBonus(Bonus $bonus): self
+    {
+        if (!$this->bonuses->contains($bonus)) {
+            $this->bonuses[] = $bonus;
+            $bonus->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBonus(Bonus $bonus): self
+    {
+        if ($this->bonuses->contains($bonus)) {
+            $this->bonuses->removeElement($bonus);
+            // set the owning side to null (unless already changed)
+            if ($bonus->getCategory() === $this) {
+                $bonus->setCategory(null);
             }
         }
 

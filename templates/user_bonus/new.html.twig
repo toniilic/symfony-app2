@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h4>
+            You can submit 4 bonuses per day
+        </h4>
+        <p>
+            Bonus 0/4
+        </p>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h2 class="border-bottom border-gray pb-2 mb-0">
+            Submit a bonus
+        </h2>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

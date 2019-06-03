@@ -55,6 +55,11 @@ class User extends BaseUser
      */
     private $bonuses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Casino", mappedBy="author")
+     */
+    private $casinos;
+
     public function __construct()
     {
         parent::__construct();
@@ -63,6 +68,7 @@ class User extends BaseUser
         $this->taskApplications = new ArrayCollection();
         $this->taskApplication = new ArrayCollection();
         $this->bonuses = new ArrayCollection();
+        $this->casinos = new ArrayCollection();
     }
 
     public function addTaskApplications(Category $category)
@@ -267,6 +273,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($bonus->getAuthor() === $this) {
                 $bonus->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Casino[]
+     */
+    public function getCasinos(): Collection
+    {
+        return $this->casinos;
+    }
+
+    public function addCasino(Casino $casino): self
+    {
+        if (!$this->casinos->contains($casino)) {
+            $this->casinos[] = $casino;
+            $casino->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCasino(Casino $casino): self
+    {
+        if ($this->casinos->contains($casino)) {
+            $this->casinos->removeElement($casino);
+            // set the owning side to null (unless already changed)
+            if ($casino->getAuthor() === $this) {
+                $casino->setAuthor(null);
             }
         }
 
