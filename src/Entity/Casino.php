@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Casino
 {
-    public const BONUSES_PER_DAY = 10;
+    public const BONUSES_PER_DAY = 20;
 
     /**
      * @ORM\Id()

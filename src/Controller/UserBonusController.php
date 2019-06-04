@@ -109,6 +109,11 @@ class UserBonusController extends AbstractController
                 // TODO: add flash message
                 return $this->redirectToRoute('user_bonus_new');
             }
+            // TODO: check if casino has more than 20 submissions
+            // get casino submission for today
+            // make an if statement
+            // show message more than x number of bonuses have been submitted for the following casino
+            Casino::BONUSES_PER_DAY;
 
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
