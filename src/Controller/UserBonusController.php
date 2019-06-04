@@ -100,9 +100,16 @@ class UserBonusController extends AbstractController
             ->getRepository(Bonus::class)
             ->getBonusesByUserOnTodaysDate($user);
 
-        dump($bonuses);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            if(count($bonuses) >= Bonus::BONUSES_PER_USER) {
+                // TODO: add flash message
+                return $this->redirectToRoute('user_bonus_new');
+            }
+
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             /** @var Bonus $bonus */
@@ -114,7 +121,7 @@ class UserBonusController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bonus);
             $entityManager->flush();
-
+            // TODO: add flash message
             return $this->redirectToRoute('user_bonus_new');
         }
 
@@ -122,7 +129,8 @@ class UserBonusController extends AbstractController
         return $this->render('user_bonus/new.html.twig', [
             //'task' => $task,
             'form' => $form->createView(),
-            'bonusesPerUser' => Bonus::BONUSES_PER_USER
+            'bonusesPerUser' => Bonus::BONUSES_PER_USER,
+            'bonusesCount' => count($bonuses)
         ]);
     }
 }
