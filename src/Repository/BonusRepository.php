@@ -52,10 +52,12 @@ class BonusRepository extends ServiceEntityRepository
     public function getBonusesByUserOnTodaysDate(User $user)
     {
         $qb = $this->createQueryBuilder('b')
-            ->where('b.publishedAt > :today')
+            ->where('b.publishedAt < :today')
+            ->andWhere('b.publishedAt > :yesterday')
             ->andWhere('b.author = :user')
             ->setParameter('user', $user)
             ->setParameter('today', new \DateTime())
+            ->setParameter('yesterday', new \DateTime('-1 day'))
             ->orderBy('b.publishedAt', 'DESC')
             ->getQuery();
 
