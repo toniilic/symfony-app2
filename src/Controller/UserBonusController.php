@@ -7,7 +7,7 @@ use App\Entity\Casino;
 use App\Entity\Category;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\EntityRepository;
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -61,12 +61,12 @@ class UserBonusController extends AbstractController
                 // 'multiple' => true,
                 // 'expanded' => true,
             ))
-            /*->add('category', EntityType::class, array(
+            ->add('category', EntityType::class, array(
                 // looks for choices from this entity
                 'class' => Category::class,
 
                 // uses the User.username property as the visible option string
-                'choice_label' => 'category',
+                'choice_label' => 'title',
 
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
@@ -76,13 +76,12 @@ class UserBonusController extends AbstractController
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
                 // 'expanded' => true,
-            ))*/
+            ))
             ->add('doesNotExpire', ChoiceType::class, [
-                /*'choices'  => [
-                    'Maybe' => null,
+                'choices'  => [
                     'Yes' => false,
                     'No' => true,
-                ],*/
+                ],
                 'label' => 'Does it expire',
             ])
             ->add('expiryDate', DateTimeType::class, [

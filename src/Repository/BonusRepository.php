@@ -47,4 +47,9 @@ class BonusRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getBonusesByUserOnTodaysDate()
+    {
+
+    }
 }
