@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bonus;
 use App\Entity\Casino;
 use App\Entity\Category;
+use App\Utils\Slugger;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,7 +33,7 @@ class UserBonusController extends AbstractController
     /**
      * @Route("/user/bonus/new", name="user_bonus_new")
      */
-    public function new(Request $request)
+    public function new(Request $request, Slugger $slugger)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -93,21 +94,28 @@ class UserBonusController extends AbstractController
 
         $form->handleRequest($request);
 
+
+        // Get bonuses from user published today
+        $bonuses = $this->getDoctrine()
+            ->getRepository(Bonus::class)
+            ->getBonusesByUserOnTodaysDate($user);
+
+        dump($bonuses);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $taskApplication = $form->getData();
-            $taskApplication->addUser($user);
+            /** @var Bonus $bonus */
+            $bonus = $form->getData();
+            $bonus->setSlug($slugger->slugify($bonus->getTitle()));
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
-            $user->addTaskApplication($taskApplication);
-            $entityManager->persist($taskApplication);
-            $entityManager->persist($user);
+            $entityManager->persist($bonus);
             $entityManager->flush();
 
-            return $this->redirectToRoute('task_show', array('id' => $task->getId()));
+            return $this->redirectToRoute('user_bonus_new');
         }
 
 

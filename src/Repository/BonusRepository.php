@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bonus;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -48,8 +49,16 @@ class BonusRepository extends ServiceEntityRepository
     }
     */
 
-    public function getBonusesByUserOnTodaysDate()
+    public function getBonusesByUserOnTodaysDate(User $user)
     {
+        $qb = $this->createQueryBuilder('b')
+            ->where('b.publishedAt > :today')
+            ->andWhere('b.author = :user')
+            ->setParameter('user', $user)
+            ->setParameter('today', new \DateTime())
+            ->orderBy('b.publishedAt', 'DESC')
+            ->getQuery();
 
+        return $qb->execute();
     }
 }
