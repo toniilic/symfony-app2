@@ -59,7 +59,6 @@ class BonusFixtures extends Fixture implements ContainerAwareInterface, OrderedF
         $bonus->setContent($description);
         $bonus->setTitle($title);
         $bonus->setBonusCode('Xdghse74');
-        $bonus->setSlug($this->container->get('slugger')->slugify($title));
         $bonus->setCategory($category);
         $bonus->setCasino($this->getReference(CasinoFixtures::CASINO_1));
         

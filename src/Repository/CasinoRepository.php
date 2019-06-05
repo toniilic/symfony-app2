@@ -47,4 +47,19 @@ class CasinoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+/*    public function getCasinoSubmissionsForToday(Casino $casino)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.id < :id')
+            ->andWhere('c.publishedAt < :today')
+            ->andWhere('c.publishedAt > :yesterday')
+            ->setParameter('id', $casino->getId())
+            ->setParameter('today', new \DateTime())
+            ->setParameter('yesterday', new \DateTime('-1 day'))
+            ->orderBy('c.publishedAt', 'DESC')
+            ->getQuery();
+
+        return $qb->execute();
+    }*/
 }

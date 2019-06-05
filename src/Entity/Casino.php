@@ -79,8 +79,14 @@ class Casino
     public function setTitle(string $title): self
     {
         $this->title = $title;
+        $this->slug = $this->slugify($this->title);
 
         return $this;
+    }
+
+    protected function slugify($string)
+    {
+        return preg_replace('/\s+/', '-', mb_strtolower(trim(strip_tags($string)), 'UTF-8')) . '-' . bin2hex(random_bytes(15));
     }
 
     public function getAuthor(): ?User

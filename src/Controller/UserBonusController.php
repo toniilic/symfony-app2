@@ -33,7 +33,7 @@ class UserBonusController extends AbstractController
     /**
      * @Route("/user/bonus/new", name="user_bonus_new")
      */
-    public function new(Request $request, Slugger $slugger)
+    public function new(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -96,30 +96,33 @@ class UserBonusController extends AbstractController
 
 
         // Get bonuses from user published today
-        $bonuses = $this->getDoctrine()
-            ->getRepository(Bonus::class)
-            ->getBonusesByUserOnTodaysDate($user);
-
+        $bonusRepo = $this->getDoctrine()
+            ->getRepository(Bonus::class);
+        $bonuses = $bonusRepo->getBonusesByUserOnTodaysDate($user);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-            if(count($bonuses) >= Bonus::BONUSES_PER_USER) {
-                // TODO: add flash message
-                return $this->redirectToRoute('user_bonus_new');
-            }
-            // TODO: check if casino has more than 20 submissions
-            // get casino submission for today
-            // make an if statement
-            // show message more than x number of bonuses have been submitted for the following casino
-            Casino::BONUSES_PER_DAY;
 
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             /** @var Bonus $bonus */
             $bonus = $form->getData();
-            $bonus->setSlug($slugger->slugify($bonus->getTitle()));
+
+            $casinoBonuses = $bonusRepo->getBonusesByCasinoOnTodaysDate($bonus->getCasino());
+
+            if(count($casinoBonuses) >= Casino::BONUSES_PER_DAY) {
+                // TODO: add flash message
+                // Message: To many (more than Casino::BONUSES_PER_DAY) submissions for the selected casino in the last 24 hours
+                return $this->redirectToRoute('user_bonus_new');
+            }
+
+            if(count($bonuses) >= Bonus::BONUSES_PER_USER) {
+                // TODO: add flash message
+                $this->addFlash('warning', 'You cannot submit more than '
+                    .Bonus::BONUSES_PER_USER . ' bonuses per day.');
+                return $this->redirectToRoute('user_bonus_new');
+            }
+
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
@@ -127,6 +130,7 @@ class UserBonusController extends AbstractController
             $entityManager->persist($bonus);
             $entityManager->flush();
             // TODO: add flash message
+            $this->addFlash('success', 'Bonus Created!');
             return $this->redirectToRoute('user_bonus_new');
         }
 
