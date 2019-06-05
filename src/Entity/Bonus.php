@@ -73,14 +73,14 @@ class Bonus
     private $casino;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $doesNotExpire;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $expiryDate;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $doesNotExpire;
 
     public function __construct()
     {
