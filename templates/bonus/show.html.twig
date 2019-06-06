@@ -2,22 +2,47 @@
 
 {% block body %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-3">
 
-<div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h2>
-        {{ bonus.title }}
-    </h2>
-    <p>
-        {{ bonus.content }}
-    </p>
-    <p>
-        <a href="{{ casino.getUrl }}" target="_blank">
-            <button type="button" class="btn btn-success">Play at {{ casino.getTitle }} >></button>
-        </a>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h2>
+                    {{ casino.title }}
+                </h2>
+                <p>
+                    {{ casino.content }}
+                </p>
+                <p>
+                    <a href="{{ casino.getUrl }}" target="_blank">
+                        <button type="button" class="btn btn-success">Play now >></button>
+                    </a>
 
-    </p>
+                </p>
 
+            </div>
+
+        </div>
+        <div class="col-8">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h2>
+                    {{ bonus.title }}
+                </h2>
+                <p>
+                    {{ bonus.content }}
+                </p>
+                <p>
+                    {{ bonus.getBonusCode }}
+                </p>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h6 class="border-bottom border-gray pb-2 mb-0">Details</h6>
