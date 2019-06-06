@@ -24,13 +24,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * @Route("/task")
+ * @Route("/bonus")
  */
-class TaskController extends AbstractController
+class BonusController extends AbstractController
 {
     /**
-    * @Route("/create", name="task_create")
-    */
+     * @Route("/create", name="task_create")
+     */
     public function create(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -101,7 +101,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="task_show")
+     * @Route("/show/{id}", name="bonus_show")
      */
     public function show(Task $task)
     {

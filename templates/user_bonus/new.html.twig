@@ -3,16 +3,6 @@
 
 {% block body %}
     <div class="my-3 p-3 bg-white rounded shadow-sm">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-            <div class="alert alert-warning">
-                {{ message }}
-            </div>
-        {% endfor %}
         <h4>
             You can submit {{ bonusesPerUser }} bonuses per day
         </h4>

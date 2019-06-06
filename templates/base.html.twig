@@ -52,14 +52,14 @@
                     {% endif %}
                 </div>
             </li>
-            <li class="nav-item dropdown">
+            {#<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{{ path('location_create') }}">Location</a>
                     <a class="dropdown-item" href="{{ path('phone_number_create') }}">Phone number</a>
                     <a class="dropdown-item" href="{{ path('task_create') }}">Task</a>
                 </div>
-            </li>
+            </li>#}
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -96,12 +96,15 @@
 
 
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-        <div class="alert alert-{{ label }}" role="alert">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
             {{ message }}
         </div>
-        {% endfor %}
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
     {% endfor %}
 
     {% block body %}{% endblock %}

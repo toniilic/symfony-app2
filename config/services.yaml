@@ -63,6 +63,8 @@ services:
         arguments: [~, App\Entity\Bonus, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Bonus' }
-    slugger:
-        alias: App\Utils\Slugger
-        public: true
+    admin.casino:
+        class: App\Admin\CasinoAdmin
+        arguments: [~, App\Entity\Casino, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Casino' }

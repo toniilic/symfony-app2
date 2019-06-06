@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bonus;
 use App\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,21 +47,18 @@ class HomeController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Get some repository of data, in our case we have an Tasks entity
-        $taskRepository = $em->getRepository(Task::class);
+        $bonusRepository = $em->getRepository(Bonus::class);
 
         // Find all the data on the Tasks table, filter your query as you need
-        $allTasksQuery = $taskRepository->createQueryBuilder('p')
-            ->where('p.approved != :approved')
-            ->setParameter('approved', 'false')
-            ->getQuery();
+        $allBonusesQuery = $bonusRepository->createQueryBuilder('p')->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
         $paginator  = $this->get('knp_paginator');
 
         // Paginate the results of the query
-        $tasks = $paginator->paginate(
+        $bonuses = $paginator->paginate(
         // Doctrine Query, not results
-            $allTasksQuery,
+            $allBonusesQuery,
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
@@ -69,7 +67,7 @@ class HomeController extends Controller
 
 
         return $this->render('home/index.html.twig', array(
-            'tasks' => $tasks
+            'bonuses' => $bonuses
         ));
     }
 
