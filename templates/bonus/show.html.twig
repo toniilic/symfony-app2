@@ -10,6 +10,12 @@
     <p>
         {{ bonus.content }}
     </p>
+    <p>
+        <a href="{{ casino.getUrl }}" target="_blank">
+            <button type="button" class="btn btn-success">Play at {{ casino.getTitle }} >></button>
+        </a>
+
+    </p>
 
 </div>
 
@@ -33,6 +39,11 @@
         <tr>
             <th scope="row">Category</th>
             <td>{{ category.getTitle }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Allowed countries</th>
+
+            <td>{{ allowedCountriesCSV }}</td>
         </tr>
 {#        <tr>
             <th scope="row">Level of expertise</th>
