@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bonus;
 use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\PhoneNumber;
@@ -29,7 +30,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class BonusController extends AbstractController
 {
     /**
-     * @Route("/create", name="task_create")
+     * @Route("/create", name="bonus_create")
      */
     public function create(Request $request)
     {
@@ -103,79 +104,18 @@ class BonusController extends AbstractController
     /**
      * @Route("/show/{id}", name="bonus_show")
      */
-    public function show(Task $task)
+    public function show(Bonus $bonus)
     {
         $user = $this->getUser();
 
-        $is_owner = $user == $task->getUser();
+        $is_owner = $user == $bonus->getAuthor();
 
-        // get users task application for this task
-        $location = $this->getDoctrine()
-            ->getRepository(Location::class)
-            ->findLocationByUser($task->getUser());
 
-        // get users task application for this task
-        $taskApplications = $this->getDoctrine()
-            ->getRepository(TaskApplication::class)
-            ->findTaskApplicationsByTask($task);
-        // TODO: get current user application for this tasks
-        $currentUserAlredySubmitted = false;
-        $currentUserSubmission = null;
-
-        foreach($taskApplications as $taskApplication) {
-
-            $taskApplications = $taskApplication->getUser()->getValues();
-
-            foreach($taskApplications as $taskApplicationUser) {
-                if($taskApplicationUser == $user) {
-                    $currentUserAlredySubmitted = true;
-                    $currentUserSubmission = $taskApplication;
-                }
-            }
-        }
-
-        $taskApplicationRepo = $this->getDoctrine()
-            ->getRepository(TaskApplication::class);
-        $taskApplicationCount = $taskApplicationRepo->getTaskApplicationsCount($task);
-
-        /** @var TaskRepository $taskRepo */
-        $taskRepo = $this->getDoctrine()
-            ->getRepository(Task::class);
-
-        /** @var @var UserRepository $userRepo */
-        $userRepo = $this->getDoctrine()
-            ->getRepository(User::class);
-
-        $em = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['id'=>1]);
-
-        /*dump($task);
-        dump($task->getUser()->getId());
-        dump($userRepo->getById($task->getUser()->getId()));
-        dump($this->getUser());
-        dump($task->getCategory());
-        dump($task->getCategory()->getTasks());
-        dump($task->getPhoneNumber());*/
-        /*dump($taskApplication);*/
-        // TODO: get Task application by current user
-
-        /**
-         * TODO: show category,
-         */
-
-        dump($currentUserAlredySubmitted);
-        dump($currentUserSubmission);
-
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
-            'category' => $task->getCategory(),
-            'phoneNumber' => $task->getPhoneNumber(),
+        return $this->render('bonus/show.html.twig', [
+            'bonus' => $bonus,
+            'category' => $bonus->getCategory(),
+            'casino' => $bonus->getCasino(),
             'is_owner' => $is_owner,
-            //'taskApplication' => $taskApplication,
-            'location' => $location,
-            'taskApplicationCount' => $taskApplicationCount,
-            'currentUserAlredySubmitted' => $currentUserAlredySubmitted,
-            'currentUserSubmission' => $currentUserSubmission
-
         ]);
     }
 }

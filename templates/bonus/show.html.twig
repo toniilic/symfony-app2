@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h2>
+        {{ bonus.title }}
+    </h2>
+    <p>
+        {{ bonus.content }}
+    </p>
+
+</div>
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Details</h6>
+
+    <table class="table">
+{#        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>#}
+        <tbody>
+        <tr>
+            <th scope="row">Casino</th>
+            <td>{{ casino.getTitle }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Category</th>
+            <td>{{ category.getTitle }}</td>
+        </tr>
+{#        <tr>
+            <th scope="row">Level of expertise</th>
+            <td>{{ bonus.levelOfExpertise }}</td>
+        </tr>
+        {% if bonus.getDueDate is not null %}
+        <tr>
+            <th scope="row">Due date</th>
+            <td>{{ bonus.getDueDate|date("m/d/Y")  }}</td>
+        </tr>
+        {% endif %}
+        {% if bonus.location is not null %}
+            <tr>
+                <th scope="row">Location</th>
+                <td>
+                    {{ bonus.location.country }},
+                    {{ bonus.location.city }}.
+                    {{ bonus.location.address }}.
+                </td>
+            </tr>
+        {% endif %}
+        {% if bonus.budget is not null %}
+            <tr>
+                <th scope="row">Budget</th>
+                <td>{{ bonus.budget }} HRK</td>
+            </tr>
+        {% endif %}
+        {% if bonus.duration is not null %}
+            <tr>
+                <th scope="row">Duration</th>
+                <td>{{ bonus.duration }} days</td>
+            </tr>
+        {% endif %}#}
+        </tbody>
+    </table>
+
+</div>
+
+
+
+{% endblock %}
+
+
