@@ -4,12 +4,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 text-center">
 
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h2>
                     {{ casino.title }}
                 </h2>
+                <img
+                        src="https://kingcasinobonus.co.uk/wp-content/uploads/2019/01/300X300_white_logo.gif"
+                        alt="{{ casino.title }}"
+                        class="rounded mx-auto d-block"
+                >
                 <p>
                     {{ casino.content }}
                 </p>
@@ -31,8 +36,11 @@
                 <p>
                     {{ bonus.content }}
                 </p>
-                <p>
-                    {{ bonus.getBonusCode }}
+                <p class="font-weight-bold">
+                    Bonus code:
+                    <div class="alert alert-danger" role="alert">
+                        {{ bonus.getBonusCode }}
+                    </div>
                 </p>
 
             </div>
