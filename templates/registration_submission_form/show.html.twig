@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RegistrationSubmissionForm{% endblock %}
+
+{% block body %}
+    <h1>RegistrationSubmissionForm</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ registration_submission_form.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ registration_submission_form.name }}</td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>{{ registration_submission_form.surname }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ registration_submission_form.username }}</td>
+            </tr>
+            <tr>
+                <th>Skype</th>
+                <td>{{ registration_submission_form.skype }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ registration_submission_form.email }}</td>
+            </tr>
+            <tr>
+                <th>CasinoTitle</th>
+                <td>{{ registration_submission_form.casinoTitle }}</td>
+            </tr>
+            <tr>
+                <th>CasinoUrl</th>
+                <td>{{ registration_submission_form.casinoUrl }}</td>
+            </tr>
+            <tr>
+                <th>Approved</th>
+                <td>{{ registration_submission_form.approved ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('registration_submission_form_index') }}">back to list</a>
+
+    <a href="{{ path('registration_submission_form_edit', {'id': registration_submission_form.id}) }}">edit</a>
+
+    {{ include('registration_submission_form/_delete_form.html.twig') }}
+{% endblock %}

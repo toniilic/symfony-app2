@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RegistrationSubmissionForm{% endblock %}
+
+{% block body %}
+
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Register as Casino Promoter</h1>
+        <p class="lead">Promote your casino with bonus codes.</p>
+    </div>
+
+
+    {{ include('registration_submission_form/_form.html.twig') }}
+
+    {#<a href="{{ path('registration_submission_form_index') }}">back to list</a>#}
+{% endblock %}

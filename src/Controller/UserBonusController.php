@@ -112,6 +112,8 @@ class UserBonusController extends AbstractController
 
             if(count($casinoBonuses) >= Casino::BONUSES_PER_DAY) {
                 // TODO: add flash message
+                $this->addFlash('warning', 'Too many submissions for the selected casino in the last 24 hours, '
+                    .Casino::BONUSES_PER_DAY . ' bonuses per day allowed.');
                 // Message: To many (more than Casino::BONUSES_PER_DAY) submissions for the selected casino in the last 24 hours
                 return $this->redirectToRoute('user_bonus_new');
             }

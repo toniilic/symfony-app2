@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RegistrationSubmissionForm index{% endblock %}
+
+{% block body %}
+    <h1>RegistrationSubmissionForm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Username</th>
+                <th>Skype</th>
+                <th>Email</th>
+                <th>CasinoTitle</th>
+                <th>CasinoUrl</th>
+                <th>Approved</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for registration_submission_form in registration_submission_forms %}
+            <tr>
+                <td>{{ registration_submission_form.id }}</td>
+                <td>{{ registration_submission_form.name }}</td>
+                <td>{{ registration_submission_form.surname }}</td>
+                <td>{{ registration_submission_form.username }}</td>
+                <td>{{ registration_submission_form.skype }}</td>
+                <td>{{ registration_submission_form.email }}</td>
+                <td>{{ registration_submission_form.casinoTitle }}</td>
+                <td>{{ registration_submission_form.casinoUrl }}</td>
+                <td>{{ registration_submission_form.approved ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('registration_submission_form_show', {'id': registration_submission_form.id}) }}">show</a>
+                    <a href="{{ path('registration_submission_form_edit', {'id': registration_submission_form.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('registration_submission_form_new') }}">Create new</a>
+{% endblock %}

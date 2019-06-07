@@ -60,6 +60,7 @@ class BonusFixtures extends Fixture implements ContainerAwareInterface, OrderedF
         $bonus->setTitle($title);
         $bonus->setBonusCode('Xdghse74');
         $bonus->setCategory($category);
+        $bonus->setDoesNotExpire(true);
         $bonus->setCasino($this->getReference(CasinoFixtures::CASINO_1));
         
 /*        $bonus->setDueDate($dueDate);

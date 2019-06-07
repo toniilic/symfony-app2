@@ -1,9 +1,16 @@
 <?php
 
+/*
+ * This file is part of the FOSUserBundle package.
+ *
+ * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace App\Controller;
+namespace App\Bundle\UserBundle\Controller;
 
-use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -11,15 +18,20 @@ use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use FOS\UserBundle\Controller\ProfileController as BaseController;
-use Symfony\Component\Security\Core\Security;
+use FOS\UserBundle\Controller\ProfileController as Base;
 
-class ProfileController extends BaseController
+/**
+ * Controller managing the user profile.
+ *
+ * @author Christophe Coevoet <stof@notk.org>
+ */
+class ProfileController extends Base
 {
     private $eventDispatcher;
     private $formFactory;
@@ -27,6 +39,7 @@ class ProfileController extends BaseController
 
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager)
     {
+        parent::__construct($eventDispatcher, $formFactory,$userManager);
         $this->eventDispatcher = $eventDispatcher;
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
@@ -73,29 +86,7 @@ class ProfileController extends BaseController
 
         $form->handleRequest($request);
 
-        $authErrorKey = Security::AUTHENTICATION_ERROR;
-        // get captcha object instance
-        $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
-            // validate the user-entered Captcha code when the form is submitted
-            $captchaCode = $request->request->get('captchaCode');
-            $isHuman = $captcha->Validate($captchaCode);
-            if ($isHuman) {
-                // Captcha validation passed, check username and password
-                return $this->redirect($this->generateUrl('fos_user_security_check'), 307);
-            } else {
-                // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
-                $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
-                $request->attributes->set($authErrorKey, $invalidCaptchaEx);
-            }
-
-
-
-
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
@@ -113,7 +104,6 @@ class ProfileController extends BaseController
 
         return $this->render('@FOSUser/Profile/edit.html.twig', array(
             'form' => $form->createView(),
-            'captcha_html' => $captcha->Html()
         ));
     }
 }
