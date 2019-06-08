@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Casino{% endblock %}
+
+{% block body %}
+    <h1>Casino</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ casino.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ casino.title }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ casino.url }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ casino.slug }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ casino.content }}</td>
+            </tr>
+            <tr>
+                <th>PublishedAt</th>
+                <td>{{ casino.publishedAt ? casino.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>AllowedCountries</th>
+                <td>{{ casino.allowedCountries ? casino.allowedCountries|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ casino.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('casino_index') }}">back to list</a>
+
+    <a href="{{ path('casino_edit', {'id': casino.id}) }}">edit</a>
+
+    {{ include('casino/_delete_form.html.twig') }}
+{% endblock %}

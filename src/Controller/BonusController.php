@@ -59,7 +59,7 @@ class BonusController extends AbstractController
         $extractedSelectedCountries = array();
 
         $selectedCountries = $casino->getAllowedCountries();
-
+        
         $countries = Intl::getRegionBundle()->getCountryNames();
 
         foreach($selectedCountries as $k => $v) {

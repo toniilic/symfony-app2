@@ -62,7 +62,7 @@ class CasinoFixtures extends Fixture implements ContainerAwareInterface, Ordered
         $casino->setContent($description);
         $casino->setTitle($title);
         $casino->setUrl('http://www.dummycasino.com');
-        $casino->setAllowedCountries(['United States', 'Great Britain']);
+        $casino->setAllowedCountries(['AF', 'AL', 'AQ']);
 
         $manager->persist($casino);
 
