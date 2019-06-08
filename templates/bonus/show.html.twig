@@ -36,12 +36,14 @@
                 <p>
                     {{ bonus.content | raw }}
                 </p>
+                {% if bonus.getBonusCode %}
                 <p class="font-weight-bold">
                     Bonus code:
                     <div class="alert alert-danger" role="alert">
                         {{ bonus.getBonusCode }}
                     </div>
                 </p>
+                {% endif %}
 
             </div>
         </div>

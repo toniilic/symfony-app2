@@ -47,7 +47,9 @@ class UserBonusController extends AbstractController
             ->add('content', TextareaType::class,
                 array('attr' => array('class' => 'ckeditor'))
             )
-            ->add('bonusCode', TextType::class)
+            ->add('bonusCode', TextType::class, array(
+                'required' => false
+            ))
             ->add('casino', EntityType::class, array(
                 // looks for choices from this entity
                 'class' => Casino::class,

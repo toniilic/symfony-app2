@@ -24,11 +24,15 @@ final class BonusAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class)
-            ->add('bonusCode', TextType::class)
+            ->add('bonusCode', TextType::class, [
+                'required' => false
+            ])
             ->add('summary', TextType::class, [
                 'required' => false
             ])
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class,
+                array('attr' => array('class' => 'ckeditor'))
+            )
             ->add('doesNotExpire', ChoiceType::class, array(
                 'choices'  => array(
                     'Yes' => true,
