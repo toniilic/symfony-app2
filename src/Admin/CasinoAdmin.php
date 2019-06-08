@@ -22,7 +22,8 @@ final class CasinoAdmin extends AbstractAdmin
         $formMapper
             ->add('title', TextType::class)
             //->add('image', FileType::class, ['label' => 'Image'])
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class,
+                array('attr' => array('class' => 'ckeditor')))
             ->add('allowedCountries', CountryType::class, [
                 'multiple' => true
             ])

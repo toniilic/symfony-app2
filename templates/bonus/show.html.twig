@@ -16,7 +16,7 @@
                         class="rounded mx-auto d-block"
                 >
                 <p>
-                    {{ casino.content }}
+                    {{ casino.content | raw }}
                 </p>
                 <p>
                     <a href="{{ casino.getUrl }}" target="_blank">
