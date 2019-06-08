@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Casino;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +19,10 @@ class CasinoType extends AbstractType
             ->add('slug')
             ->add('content')
             ->add('publishedAt')
-            ->add('allowedCountries')
-            ->add('image')
+            ->add('allowedCountries', CountryType::class, [
+                'multiple' => true
+            ])
+            ->add('image', FileType::class, array('data_class' => null))
             ->add('author')
         ;
     }

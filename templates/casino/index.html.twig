@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>actions</th>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Url</th>
@@ -16,12 +17,15 @@
                 <th>PublishedAt</th>
                 <th>AllowedCountries</th>
                 <th>Image</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for casino in casinos %}
             <tr>
+                <td>
+                    <a href="{{ path('casino_show', {'id': casino.id}) }}">show</a>
+                    <a href="{{ path('casino_edit', {'id': casino.id}) }}">edit</a>
+                </td>
                 <td>{{ casino.id }}</td>
                 <td>{{ casino.title }}</td>
                 <td>{{ casino.url }}</td>
@@ -30,10 +34,6 @@
                 <td>{{ casino.publishedAt ? casino.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ casino.allowedCountries ? casino.allowedCountries|join(', ') : '' }}</td>
                 <td>{{ casino.image }}</td>
-                <td>
-                    <a href="{{ path('casino_show', {'id': casino.id}) }}">show</a>
-                    <a href="{{ path('casino_edit', {'id': casino.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
