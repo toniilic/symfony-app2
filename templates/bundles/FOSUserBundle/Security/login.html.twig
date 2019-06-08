@@ -3,8 +3,22 @@
 {% block body %}
 
 
-{% block fos_user_content %}
-    {{ include('@FOSUser/Security/login_content.html.twig') }}
-{% endblock fos_user_content %}
+{% block content %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Login</h1>
+            <p class="lead text-muted">Submit your bonus codes.</p>
+            <p>
+                {{ include('@FOSUser/Security/login_content.html.twig') }}
+            </p>
+            <p>
+                or <a href="{{ path('registration_submission_form_new') }}" class="btn btn-primary my-2">Register</a>
+            </p>
+        </div>
+    </section>
+
+
+{% endblock content %}
 
 {% endblock %}

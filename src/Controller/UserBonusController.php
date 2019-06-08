@@ -44,7 +44,9 @@ class UserBonusController extends AbstractController
 
         $form = $this->createFormBuilder($bonus)
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class,
+                array('attr' => array('class' => 'ckeditor'))
+            )
             ->add('bonusCode', TextType::class)
             ->add('casino', EntityType::class, array(
                 // looks for choices from this entity

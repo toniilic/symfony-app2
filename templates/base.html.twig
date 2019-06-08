@@ -38,11 +38,11 @@
             {#<li class="nav-item">
                 <a class="nav-link" href="{{ path('fos_user_profile_show') }}">Profile</a>
             </li>#}
-{#            {% if not app.user %}#}
+            {% if not app.user %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('registration_submission_form_new') }}">Register</a>
             </li>
-{#            {% endif %}#}
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_bonus_new') }}">Submit Bonus</a>
             </li>
@@ -114,7 +114,31 @@
 
     {% block body %}{% endblock %}
 </main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+    </div>
+</footer>
+
 {% block javascripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+<script src="{{ asset('js/ckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(function() {
+        $('textarea.ckeditor').ckeditor();
+    });
+</script>
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

@@ -45,12 +45,6 @@ services:
         decorates: 'fos_user.profile.controller'
         arguments:
             $formFactory: '@fos_user.registration.form.factory'
-
-    admin.blog_post:
-        class: App\Admin\BlogPostAdmin
-        arguments: [~, App\Entity\BlogPost, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: 'Blog post' }
     admin.registration_submission_form:
         class: App\Admin\RegistrationSubmissionFormAdmin
         arguments: [~, App\Entity\RegistrationSubmissionForm, ~]
