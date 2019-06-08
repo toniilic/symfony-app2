@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Form\Type\BooleanType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -20,6 +21,7 @@ final class CasinoAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class)
+            ->add('image', FileType::class, ['label' => 'Image'])
             ->add('content', TextareaType::class)
             ->add('allowedCountries', CountryType::class, [
                 'multiple' => true

@@ -40,23 +40,22 @@ class CasinoFixtures extends Fixture implements ContainerAwareInterface, Ordered
 
         $casino = $this->makeCasino($manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE), $description,
             'Lorem Casino Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS)
-            , Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+            , 20);
         $this->addReference(self::CASINO_1, $casino);
         $this->makeCasino($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Casino Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+            20);
         $this->makeCasino($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Casino Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+            20);
         $this->makeCasino($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Casino Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+            20);
 
         $manager->flush();
     }
 
-    private function makeCasino(&$manager, User $user, $description, $title, $budget, $category,
-                               $levelOfExpertise, $duration, $approved = true)
+    private function makeCasino(&$manager, User $user, $description, $title, $budget, $category, $duration, $approved = true)
     {
         $casino = new Casino();
         $casino->setAuthor($user);

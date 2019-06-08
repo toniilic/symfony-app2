@@ -29,11 +29,6 @@ class Category
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="category")
-     */
-    private $tasks;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Bonus", mappedBy="category")
      */
     private $bonuses;
@@ -69,37 +64,6 @@ class Category
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): self
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks[] = $task;
-            $task->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): self
-    {
-        if ($this->tasks->contains($task)) {
-            $this->tasks->removeElement($task);
-            // set the owning side to null (unless already changed)
-            if ($task->getCategory() === $this) {
-                $task->setCategory(null);
-            }
-        }
 
         return $this;
     }

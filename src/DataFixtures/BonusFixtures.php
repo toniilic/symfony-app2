@@ -37,22 +37,22 @@ class BonusFixtures extends Fixture implements ContainerAwareInterface, OrderedF
 
         $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE), $description,
             'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS)
-            , Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+            ,  20);
         $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+             20);
         $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+             20);
         $this->makeBonus($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
             'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::FREE_SPINS),
-            Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+             20);
 
         $manager->flush();
     }
 
     private function makeBonus(&$manager, User $user, $description, $title, $budget, $category,
-                              $levelOfExpertise, $duration, $approved = true)
+                               $duration, $approved = true)
     {
         $bonus = new Bonus();
         $bonus->setAuthor($user);
