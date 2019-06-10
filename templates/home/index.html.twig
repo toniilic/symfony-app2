@@ -10,7 +10,7 @@
         <img
                 width="30"
                 height="30"
-                src="https://kingcasinobonus.co.uk/wp-content/uploads/2019/01/300X300_white_logo.gif"
+                src="{{ asset('uploads/images/' ~ bonus.casino.image) }}"
                 alt="{{ bonus.casino.title }}" class="mr-2 rounded"
         >
         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
@@ -43,6 +43,7 @@
 
 
 
+{#
 <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
     <div class="media text-muted pt-3">
@@ -79,6 +80,7 @@
         <a href="#">All suggestions</a>
     </small>
 </div>
+#}
 
 
 {% endblock %}
