@@ -57,12 +57,12 @@ class UserBonusController extends AbstractController
                 // uses the User.username property as the visible option string
                 'choice_label' => 'title',
 
-                /*'query_builder' => function (EntityRepository $er) use ($user){
+                'query_builder' => function (EntityRepository $er) use ($user){
                     return $er->createQueryBuilder('c')
                         ->where('c.author = :user')
                         ->setParameter('user', $user)
                         ->orderBy('c.title', 'ASC');
-                },*/
+                },
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
