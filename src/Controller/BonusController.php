@@ -33,6 +33,7 @@ class BonusController extends AbstractController
             'casino' => $bonus->getCasino(),
             'allowedCountriesCSV' => $allowedCountriesCSV,
             'is_owner' => $is_owner,
+            'title' => $bonus->getTitle()
         ]);
     }
 

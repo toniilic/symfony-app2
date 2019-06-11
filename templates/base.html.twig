@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
-    {{ sonata_seo_title() }}
+    <title>Casino Scraper{% if title is defined %} | {{ title }}{% endif %}</title>
     {{ sonata_seo_metadatas() }}
     {% block stylesheets %}
     <!-- Bootstrap core CSS -->

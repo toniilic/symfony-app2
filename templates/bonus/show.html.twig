@@ -4,31 +4,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3 text-center">
+        <div class="mt-3 col-md-3 text-center bg-white rounded shadow-sm">
 
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-                <h2>
-                    {{ casino.title }}
-                </h2>
-                <img
-                        src="{{ asset('uploads/images/' ~ casino.image) }}"
-                        alt="{{ casino.title }}"
-                        class="rounded mx-auto d-block"
-                >
-                <p>
-                    {{ casino.content | raw }}
-                </p>
-                <p>
-                    <a href="{{ casino.getUrl }}" target="_blank">
-                        <button type="button" class="btn btn-success">Play now >></button>
-                    </a>
 
-                </p>
+            <h2>
+                {{ casino.title }}
+            </h2>
+            <img
+                    src="{{ asset('uploads/images/' ~ casino.image) }}"
+                    alt="{{ casino.title }}"
+                    class="rounded mx-auto d-block"
+            >
+            <p>
+                {{ casino.content | raw }}
+            </p>
+            <p>
+                <a href="{{ casino.getUrl }}" target="_blank">
+                    <button type="button" class="btn btn-success">Play now >></button>
+                </a>
 
-            </div>
+            </p>
+
+
 
         </div>
-        <div class="col-8">
+        <div class="col-md-9">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h2>
                     {{ bonus.title }}
@@ -66,19 +66,25 @@
             <th scope="col">Handle</th>
         </tr>
         </thead>#}
-        <tbody>
-        <tr>
-            <th scope="row">Casino</th>
-            <td>{{ casino.getTitle }}</td>
-        </tr>
+
         <tr>
             <th scope="row">Category</th>
             <td>{{ category.getTitle }}</td>
         </tr>
+        {% if bonus.doesNotExpire == false %}
         <tr>
+            <th scope="row">Expires at</th>
+            <td>{{ bonus.expiryDate|date(" h:i:s A m/d/Y") }}</td>
+        </tr>
+        {% endif %}
+        <tr style="max-width: 100%;">
             <th scope="row">Allowed countries</th>
 
-            <td>{{ allowedCountriesCSV }}</td>
+            <td>
+                <p style="word-wrap: break-word;">
+                    {{ allowedCountriesCSV }}
+                </p>
+            </td>
         </tr>
 {#        <tr>
             <th scope="row">Level of expertise</th>
