@@ -17,7 +17,7 @@ class CasinoType extends AbstractType
         $builder
             ->add('title')
             ->add('url')
-            ->add('slug')
+            //->add('slug')
             ->add('content', TextType::class, [
                 'required' => false
             ])

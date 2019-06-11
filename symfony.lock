@@ -256,6 +256,9 @@
     "sonata-project/exporter": {
         "version": "2.0.1"
     },
+    "sonata-project/seo-bundle": {
+        "version": "2.7.0"
+    },
     "sonata-project/user-bundle": {
         "version": "4.3.0"
     },

@@ -74,3 +74,6 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%images_directory%'
+    Sonata\SeoBundle\Seo\SeoPageInterface:
+        alias: "sonata.seo.page.default"
+        public: true
